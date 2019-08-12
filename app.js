@@ -29,7 +29,7 @@ app.use(async (ctx, next) => {
 // add url-route:
 router.get('/hello/:name', async (ctx, next) => {
     var name = ctx.params.name;
-    ctx.response.body = `<h1>Hello, ${name}!</h1>`;
+    ctx.response.body = `<h1>Hello, ${name}~ 好喜欢你呀~</h1>`;
 });
 
 router.get('/', async (ctx, next) => {
