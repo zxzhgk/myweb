@@ -22,7 +22,7 @@ for(var devName in interfaces){
 }
 // log request URL:
 app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...${IPAddress}`);
+    console.log(`Process ${ctx.request.method} ${ctx.request.url}`);
     await next();
 });
 
@@ -40,7 +40,4 @@ router.get('/', async (ctx, next) => {
 app.use(router.routes());
 
 app.listen(3000);
-console.log(
-`app started at port lochost3000...
- ${IPAddress}:3000
-`);
+console.log(`${IPAdress}:3000`);
