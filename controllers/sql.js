@@ -48,7 +48,7 @@ const fn_query = async (ctx,next)=>{
             name:ctx.request.body.name
         }
     });
-    ctx.response.body = `<h1>${pets}</h1>`;
+    ctx.response.body = `<h1>${JSON.stringify(pets)}</h1>`;
 }
 module.exports = {
     "post/sql/add":fn_add,
