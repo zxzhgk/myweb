@@ -27,20 +27,16 @@ var Pet = sequelize.define('pets', {
 });
 const fn_add = async (ctx,next)=>{
     var now = Date.now();
-    Pet.create({
-        id: 'g-' + now,
-        name:ctx.request.body.name,
+    var dog = await Pet.create({
+        id: 'd-' + now,
+        name: 'Odie',
         gender: false,
-        birth: '2007-07-07',
+        birth: '2008-08-08',
         createdAt: now,
         updatedAt: now,
         version: 0
-    }).then(function (p) {
-        ctx.response.body = `<h1>${JSON.stringify(p)}</h1>`;
-    }).catch(function (err) {
-        ctx.response.body = `<h1>${err}</h1>`;
-        console.log('failed: ' + err);
     });
+    ctx.response.body = `<h1>${JSON.stringify(dog)}</h1>`;
 }
 const fn_query = async (ctx,next)=>{
     var pets = await Pet.findAll({
@@ -52,5 +48,5 @@ const fn_query = async (ctx,next)=>{
 }
 module.exports = {
     "post/sql/add":fn_add,
-    "post/sql/query":fn_query
+    "get/sql/query":fn_query
 }
