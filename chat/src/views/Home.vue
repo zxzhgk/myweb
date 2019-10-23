@@ -6,7 +6,7 @@
     width="30%">
     <el-input placeholder="起个名字吧" maxlength="2" v-model="name"></el-input>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      <el-button type="primary" @click="setName">确 定</el-button>
     </span>
   </el-dialog>
   <div class="chat">
@@ -19,13 +19,15 @@
           </div>
         </div>
         <div class="message-send">
-          <el-input placeholder="请输入内容" v-model="message" class="input-with-select">
+          <el-input placeholder="请输入内容" v-model="message" @keyup.enter.native="send" class="input-with-select">
             <el-button slot="append" icon="el-icon-chat-line-round" type="primary" @click="send">发送</el-button>
           </el-input>
         </div>
       </el-main>
       <el-aside class="aside">
-        <div class="user-box"></div>
+        <div class="user-box">
+          <div class="user" v-for="(u,key) in user" :key="key">{{u}}</div>
+        </div>
       </el-aside>
     </el-container>
   </div>
@@ -45,24 +47,34 @@ export default {
     return {
       message:"",
       msgList:[],
+      user:[],
       name:"默",
-      dialogVisible:true
+      dialogVisible:false
     }
   },
   created() {
-    // this.$axios.post(`http://192.168.124.96:3000/login`)
+    if(localStorage.getItem("name")){
+      this.name=localStorage.getItem("name");
+      this.user.push(this.name)
+    }else{
+      this.dialogVisible=true;
+    }
     // 打开一个WebSocket:
     this.ws = new WebSocket('ws://134.175.187.181:3001/test');
     // 响应onmessage事件:
     this.ws.onmessage = msg=>{ 
-      console.log(msg.data)
-      console.log(JSON.parse(msg.data))
-      this.msgList.push(JSON.parse(msg.data))
-      console.log(this)
+      let msgObject=JSON.parse(msg.data)
+      this.msgList.push(msgObject)
+      if(!this.user.includes(msgObject.name)){
+        this.user.push(msgObject.name)
+        // this.$message({
+        //   message: `欢迎${msgObject.name}`,
+        //   type: 'success'
+        // });
+      }
       this.$nextTick(()=>{
         this.$refs.messageList.scrollTop = this.$refs.messageList.scrollHeight
       })
-      console.log(this.msgList)
     };
     // 给服务器发送一个字符串:
     this.ws.addEventListener('open', ()=> {
@@ -71,6 +83,13 @@ export default {
     
   },
   methods: {
+    setName(){
+      this.dialogVisible=false;
+      if (this.name !="默") {
+        localStorage.setItem("name",this.name);
+        this.user.push(this.name)
+      }
+    },
     send(){
       let data ={
         name:this.name,
@@ -138,6 +157,26 @@ export default {
         height:100%;
         overflow: scroll;
         background: rgb(243, 241, 241);
+        display: flex;
+        padding: 10px;
+        // justify-content: space-around;
+        flex-wrap:wrap;
+        .user{
+          flex: none;
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+          line-height: 50px;
+          background: #737573;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+          text-align: center;
+          margin-right: 10px;
+        }
+      }
+      .user-box:after {
+        flex: auto;
       }
     }
     
