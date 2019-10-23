@@ -52,7 +52,7 @@ export default {
   created() {
     // this.$axios.post(`http://192.168.124.96:3000/login`)
     // 打开一个WebSocket:
-    this.ws = new WebSocket('ws://192.168.124.96:3001/test');
+    this.ws = new WebSocket('ws://134.175.187.181:3001/test');
     // 响应onmessage事件:
     this.ws.onmessage = msg=>{ 
       console.log(msg.data)
