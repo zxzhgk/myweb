@@ -13,6 +13,6 @@ const fn_login = async (ctx,next)=>{
     }
 }
 module.exports = {
-    // "get/":fn_home,
+    "get/":fn_home,
     "post/login":fn_login
 }
