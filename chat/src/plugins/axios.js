@@ -20,7 +20,7 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
   config => {
     // Do something before request is sent
-    config.headers['token'] = getToken('user_type');
+    // config.headers['token'] = getToken('user_type');
     // console.log(config)
     // if(config.method == 'post') {
     //   config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
