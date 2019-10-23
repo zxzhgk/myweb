@@ -3,7 +3,7 @@ const bodyParser = require('koa-bodyparser');
 const os=require('os');
 const controllers = require("./controllers.js")
 const static = require('koa-static');
-const cors = require('koa2-cors');
+
 
 const app = new Koa();
 app.use(bodyParser());
@@ -19,29 +19,6 @@ for(var devName in interfaces){
         }  
   }  
 }
-function parseUser(obj) {
-      if (!obj) {
-            return;
-      }
-      console.log('try parse: ' + obj);
-      let s = '';
-      if (typeof obj === 'string') {
-            s = obj;
-      } else if (obj.headers) {
-            let cookies = new Cookies(obj, null);
-            s = cookies.get('name');
-      }
-      if (s) {
-            try {
-                  let user = JSON.parse(Buffer.from(s, 'base64').toString());
-                  console.log(`User: ${user.name}, ID: ${user.id}`);
-                  return user;
-            } catch (e) {
-                  // ignore
-            }
-      }
-}
-app.use(cors())
 app.use(async (ctx, next) => {
       console.log(ctx.cookies)
       // ctx.set('Access-Control-Allow-Origin', 'http://192.168.124.96:3000');
