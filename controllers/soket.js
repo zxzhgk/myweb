@@ -11,13 +11,13 @@ const wss = new WebSocketServer({
 let wsc = new WebSocket('ws://localhost:3001/test');
 // 打开WebSocket连接后立刻发送一条消息:
 wsc.on('open', function () {
-    console.log(`[CLIENT] open()`);
+    // console.log(`[CLIENT] open()`);
     wsc.send('Hello!');
 })
 wss.on('connection', function (ws) {
-    console.log(`[SERVER] connection()`);
+    // console.log(`[SERVER] connection()`);
     ws.on('message', function (message) {
-        console.log(`[SERVER] Received: ${message}`);
+        // console.log(`[SERVER] Received: ${message}`);
         ws.send(`ECHO: ${message}`, (err) => {
             if (err) {
                 console.log(`[SERVER] error: ${err}`);
