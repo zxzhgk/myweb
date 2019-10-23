@@ -77,6 +77,7 @@ export default {
         msg:this.message
       }
       this.ws.send(JSON.stringify(data));
+      this.message="";
     }
   }
 }
