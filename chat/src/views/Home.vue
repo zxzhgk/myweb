@@ -80,6 +80,15 @@ export default {
     });
     
   },
+  watch:{
+    user:function(n,o){
+      this.$notify({
+          title: '来了一位新伙伴~',
+          message: `欢迎 ${n[n.length-1]} 加入聊天室~`,
+          type: 'success'
+        });
+    }
+  },
   methods: {
     setName(){
       this.dialogVisible=false;
@@ -89,18 +98,22 @@ export default {
       }
     },
     send(){
-      let data ={
-        name:this.name,
-        msg:this.message
+      if(this.message!=""){
+        let data ={
+          name:this.name,
+          msg:this.message
+        }
+        this.ws.send(JSON.stringify(data));
+        this.message="";
+      }else{
+        this.$message.error('说点啥呗~');
       }
-      this.ws.send(JSON.stringify(data));
-      this.message="";
+      
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-
 .main{
   position: relative;
   width: 100vw;
@@ -109,6 +122,7 @@ export default {
   justify-content:center;
   align-items: center;
   background: rgb(243, 241, 241);
+  overflow: hidden;
   // background: linear-gradient(-45deg,#e9d947,#ce69ac, #ee7752, #e04d85, #23a6d5, #23d5ab);
 	// background-size: 1000% 1000%;
 	// animation: gradientBG 20s ease infinite;
@@ -180,12 +194,14 @@ export default {
       height: 80vh;
       padding: 2px 0 2px 2px;
       .user-box{
-        height: 80vh;
+        height: 79vh;
         overflow: scroll;
         background: rgb(243, 241, 241);
         display: flex;
-        padding: 10px;
+        padding: 10px 0 10px 10px;
         flex-wrap:wrap;
+        // justify-content: space-around;
+        // justify-content: center;
         .user{
           flex: none;
           height: 30px;
@@ -195,6 +211,7 @@ export default {
           color: #fff;
           font-size: 14px;
           margin-right: 10px;
+          margin-bottom: 10px;
         }
       }
       .user-box:after{
@@ -222,9 +239,9 @@ export default {
   }
 }
 .background span {
-  width: 20vmin;
-  height: 20vmin;
-  border-radius: 20vmin;
+  width: 20vh;
+  height: 20vh;
+  border-radius: 20vh;
   backface-visibility: hidden;
   position: absolute;
   animation-name: move;
@@ -239,7 +256,7 @@ export default {
   animation-duration: 15s;
   animation-delay: -13.8s;
   transform-origin: 11vw -22vh;
-  box-shadow: 40vmin 0 10.12735945vmin currentColor;
+  box-shadow: 40vh 0 10.12735945vh currentColor;
 }
 .background span:nth-child(2) {
   color: #E45A84;
@@ -248,7 +265,7 @@ export default {
   animation-duration: 13.8s;
   animation-delay: -10.9s;
   transform-origin: 10vw 23vh;
-  box-shadow: 40vmin 0 12.7346672971vmin currentColor;
+  box-shadow: 40vh 0 12.7346672971vh currentColor;
 }
 .background span:nth-child(3) {
   color: #FFACAC;
@@ -257,7 +274,7 @@ export default {
   animation-duration: 15.9s;
   animation-delay: -6.7s;
   transform-origin: -9vw -24vh;
-  box-shadow: -40vmin 0 11.4923952406vmin currentColor;
+  box-shadow: -40vh 0 11.4923952406vh currentColor;
 }
 .background span:nth-child(4) {
   color: #E45A84;
@@ -266,7 +283,7 @@ export default {
   animation-duration: 14.3s;
   animation-delay: -12.6s;
   transform-origin: 16vw 25vh;
-  box-shadow: 40vmin 0 13.3657534039vmin currentColor;
+  box-shadow: 40vh 0 13.3657534039vh currentColor;
 }
 .background span:nth-child(5) {
   color: #FFACAC;
@@ -275,7 +292,7 @@ export default {
   animation-duration: 15.9s;
   animation-delay: -10s;
   transform-origin: 8vw 3vh;
-  box-shadow: -40vmin 0 13.3942178273vmin currentColor;
+  box-shadow: -40vh 0 13.3942178273vh currentColor;
 }
 .background span:nth-child(6) {
   color: #FFACAC;
@@ -284,7 +301,7 @@ export default {
   animation-duration: 11.6s;
   animation-delay: -6s;
   transform-origin: 0vw 17vh;
-  box-shadow: -40vmin 0 7.6304875279vmin currentColor;
+  box-shadow: -40vh 0 7.6304875279vh currentColor;
 }
 .background span:nth-child(7) {
   color: #FFACAC;
@@ -293,7 +310,7 @@ export default {
   animation-duration: 11s;
   animation-delay: -6.9s;
   transform-origin: 11vw -8vh;
-  box-shadow: 40vmin 0 13.6665321499vmin currentColor;
+  box-shadow: 40vh 0 13.6665321499vh currentColor;
 }
 .background span:nth-child(8) {
   color: #E45A84;
@@ -302,7 +319,7 @@ export default {
   animation-duration: 15s;
   animation-delay: -10.9s;
   transform-origin: 25vw 15vh;
-  box-shadow: 40vmin 0 13.2849881717vmin currentColor;
+  box-shadow: 40vh 0 13.2849881717vh currentColor;
 }
 .background span:nth-child(9) {
   color: #FFACAC;
@@ -311,7 +328,7 @@ export default {
   animation-duration: 11.7s;
   animation-delay: -13.9s;
   transform-origin: -11vw -3vh;
-  box-shadow: 40vmin 0 7.2158804055vmin currentColor;
+  box-shadow: 40vh 0 7.2158804055vh currentColor;
 }
 .background span:nth-child(10) {
   color: #583C87;
@@ -320,7 +337,7 @@ export default {
   animation-duration: 12.1s;
   animation-delay: -11.7s;
   transform-origin: -5vw -7vh;
-  box-shadow: -40vmin 0 7.4269772253vmin currentColor;
+  box-shadow: -40vh 0 7.4269772253vh currentColor;
 }
 .background span:nth-child(11) {
   color: #FFACAC;
@@ -329,7 +346,7 @@ export default {
   animation-duration: 13.4s;
   animation-delay: -5.9s;
   transform-origin: 7vw -19vh;
-  box-shadow: 40vmin 0 11.2741559637vmin currentColor;
+  box-shadow: 40vh 0 11.2741559637vh currentColor;
 }
 .background span:nth-child(12) {
   color: #FFACAC;
@@ -338,7 +355,7 @@ export default {
   animation-duration: 15.8s;
   animation-delay: -8.2s;
   transform-origin: 24vw 3vh;
-  box-shadow: 40vmin 0 11.2552482722vmin currentColor;
+  box-shadow: 40vh 0 11.2552482722vh currentColor;
 }
 .background span:nth-child(13) {
   color: #FFACAC;
@@ -347,7 +364,7 @@ export default {
   animation-duration: 10.4s;
   animation-delay: -11.5s;
   transform-origin: 13vw 24vh;
-  box-shadow: -40vmin 0 6.2939412125vmin currentColor;
+  box-shadow: -40vh 0 6.2939412125vh currentColor;
 }
 .background span:nth-child(14) {
   color: #E45A84;
@@ -356,7 +373,7 @@ export default {
   animation-duration: 14.2s;
   animation-delay: -3s;
   transform-origin: -13vw -15vh;
-  box-shadow: -40vmin 0 10.5039271244vmin currentColor;
+  box-shadow: -40vh 0 10.5039271244vh currentColor;
 }
 .background span:nth-child(15) {
   color: #583C87;
@@ -365,7 +382,7 @@ export default {
   animation-duration: 14s;
   animation-delay: -6.8s;
   transform-origin: 7vw 20vh;
-  box-shadow: 40vmin 0 10.924056322vmin currentColor;
+  box-shadow: 40vh 0 10.924056322vh currentColor;
 }
 .background span:nth-child(16) {
   color: #E45A84;
@@ -374,7 +391,7 @@ export default {
   animation-duration: 11s;
   animation-delay: -14.4s;
   transform-origin: -20vw 4vh;
-  box-shadow: -40vmin 0 13.3859956789vmin currentColor;
+  box-shadow: -40vh 0 13.3859956789vh currentColor;
 }
 .background span:nth-child(17) {
   color: #FFACAC;
@@ -383,7 +400,7 @@ export default {
   animation-duration: 10.7s;
   animation-delay: -3.7s;
   transform-origin: -11vw 12vh;
-  box-shadow: 40vmin 0 14.8726292689vmin currentColor;
+  box-shadow: 40vh 0 14.8726292689vh currentColor;
 }
 .background span:nth-child(18) {
   color: #583C87;
@@ -392,7 +409,7 @@ export default {
   animation-duration: 10.1s;
   animation-delay: -13.6s;
   transform-origin: -19vw -1vh;
-  box-shadow: 40vmin 0 8.5771411832vmin currentColor;
+  box-shadow: 40vh 0 8.5771411832vh currentColor;
 }
 .background span:nth-child(19) {
   color: #583C87;
@@ -401,7 +418,7 @@ export default {
   animation-duration: 11.5s;
   animation-delay: -10.1s;
   transform-origin: -20vw 22vh;
-  box-shadow: 40vmin 0 8.1729042124vmin currentColor;
+  box-shadow: 40vh 0 8.1729042124vh currentColor;
 }
 .background span:nth-child(20) {
   color: #583C87;
@@ -410,6 +427,6 @@ export default {
   animation-duration: 12.3s;
   animation-delay: -11.3s;
   transform-origin: 10vw -1vh;
-  box-shadow: 40vmin 0 13.5347652223vmin currentColor;
+  box-shadow: 40vh 0 13.5347652223vh currentColor;
 }
 </style>
