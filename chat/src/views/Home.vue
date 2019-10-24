@@ -4,7 +4,7 @@
   <el-dialog
     title="起个名字吧"
     :visible.sync="dialogVisible"
-    width="30%">
+    width="300px">
     <el-input placeholder="起个名字吧" maxlength="4" v-model="name"></el-input>
     <div slot="footer">
       <el-button type="primary" @click="setName">确 定</el-button>
@@ -131,6 +131,8 @@ export default {
     height: 80vh;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     background: #Fff;
+    z-index: 100;
+    opacity: .6;
     .message-box{
       height: 80vh;
       overflow: hidden;
