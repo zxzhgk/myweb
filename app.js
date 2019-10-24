@@ -30,5 +30,5 @@ app.use(async (ctx, next) => {
 app.use(static(__dirname+"/chat/dist"));
 // 配置路由控制
 app.use(controllers());
-app.listen(3000);
-console.log(`${IPAdress}:3000`);
+app.listen(80);
+console.log(`${IPAdress}:80`);
