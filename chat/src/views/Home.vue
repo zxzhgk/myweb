@@ -21,11 +21,11 @@
         </div>
         <div class="message-send">
           <el-input placeholder="请输入内容" v-model="message" @keyup.enter.native="send" class="input-with-select">
-            <el-button slot="append" icon="el-icon-chat-line-round" type="primary" @click="send">发送 or enter</el-button>
+            <el-button slot="append" icon="el-icon-chat-line-round" type="primary" @click="send">发送</el-button>
           </el-input>
         </div>
       </el-main>
-      <el-aside class="aside" width="30%">
+      <el-aside class="aside hidden-xs-only">
         <div class="user-box">
           <div class="user" v-for="(u,key) in user" :key="key">{{u}}</div>
         </div>
@@ -127,7 +127,7 @@ export default {
 	// background-size: 1000% 1000%;
 	// animation: gradientBG 20s ease infinite;
   .chat{
-    width: 50vw;
+    width: 90vw;
     height: 80vh;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     background: #Fff;
@@ -170,7 +170,7 @@ export default {
           }
           .text{
             flex: none;
-            max-width: 80%;
+            max-width: 75%;
             font-size: 12px;
             color: #737573;
             line-height: 30px;
