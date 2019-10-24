@@ -261,7 +261,6 @@ export default {
             background: #408bb6;
           }
           .text{
-            font-family:'webfont';
             flex: none;
             max-width: 75%;
             font-size: 12px;
