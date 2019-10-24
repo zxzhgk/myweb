@@ -6,9 +6,9 @@
     :visible.sync="dialogVisible"
     width="30%">
     <el-input placeholder="起个名字吧" maxlength="4" v-model="name"></el-input>
-    <span slot="footer" class="dialog-footer">
+    <div slot="footer">
       <el-button type="primary" @click="setName">确 定</el-button>
-    </span>
+    </div>
   </el-dialog>
   <div class="chat">
     <el-container>
