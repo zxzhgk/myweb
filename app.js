@@ -20,10 +20,6 @@ for(var devName in interfaces){
   }  
 }
 app.use(async (ctx, next) => {
-      console.log(ctx.cookies)
-      // ctx.set('Access-Control-Allow-Origin', 'http://192.168.124.96:3000');
-      // console.log(parseUser(ctx.cookies.get('name') || ''))
-      // ctx.state.user = parseUser(ctx.cookies.get('name') || '');
       await next();
 });
 // 配置静态web服务的中间件chat
