@@ -200,7 +200,7 @@ export default {
 <style lang="scss" scoped>
 
 .backgroud{
-  background: #fffaf0;
+  background: #82d9a2;
   overflow: hidden;
   // max-width: 1000px;
 }
@@ -227,11 +227,12 @@ export default {
       overflow: hidden;
       padding: 2px;
       .message-list{
+        max-width: 1000px;
         height: calc(80vh - 60px);
         overflow: scroll;
         // background: rgb(243, 241, 241);
         border-radius: 5px;
-        margin-bottom: 10px;
+        margin: 10px auto 0;
         .msg{
           display: flex;
           padding: 10px;
