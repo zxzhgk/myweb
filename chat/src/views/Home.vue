@@ -156,17 +156,17 @@ export default {
             height: 30px;
             position: relative;
           }
-          .name:after{
-            position: absolute;
-            content:"";
-            top: 7px;
-            right: -10px;
-            width:0;  
-            height:0;  
-            border-top: 8px solid transparent;  
-            border-left: 10px solid rgb(252, 252, 252);  
-            border-bottom: 8px solid transparent;
-          }
+          // .name:after{
+          //   position: absolute;
+          //   content:"";
+          //   top: 7px;
+          //   right: -10px;
+          //   width:0;  
+          //   height:0;  
+          //   border-top: 8px solid transparent;  
+          //   border-left: 10px solid rgb(252, 252, 252);  
+          //   border-bottom: 8px solid transparent;
+          // }
           .myself{
             background: #408bb6;
           }
@@ -181,6 +181,18 @@ export default {
             background: rgb(255, 255, 255);
             border-radius: 5px;
             word-wrap:break-word;
+            position: relative;
+          }
+          .text:before{
+            position: absolute;
+            content:"";
+            top: 7px;
+            left: -10px;
+            width:0;  
+            height:0;  
+            border-top: 8px solid transparent;  
+            border-right: 10px solid rgb(255, 255, 255);  
+            border-bottom: 8px solid transparent;
           }
         }
         .msg:after{
